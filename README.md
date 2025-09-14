@@ -103,6 +103,3 @@ matplotlib
 All rights reserved. This project was submitted as part of the academic requirements for course 20595 (*Data Mining*), Open University of Israel.
 
 ---
-
-
-רוצה שאבנה לך עכשיו גם את **שלד התיקיות** (public + private repo) כדי שתדביקי ישר, כמו שעשינו באסמבלר?
