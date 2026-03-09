@@ -441,7 +441,13 @@ K-Means Clustering
 PyTorch
 
 ---
+## Academic Context
 
+This project was developed as part of a Data Mining course at the Open University of Israel.
+
+The repository presents the implementation, experiments, and analysis performed during the project, adapted for portfolio and learning purposes.
+
+---
 # ⚠ Academic Integrity Notice
 
 This repository is shared for educational and portfolio purposes only.
