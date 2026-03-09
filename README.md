@@ -219,11 +219,8 @@ The analysis produced **54 association rules** with **Lift > 1**, focusing on th
 
 These rules reveal combinations of medical and demographic factors associated with stroke risk.
 
-<img width="852" height="740" alt="image" src="https://github.com/user-attachments/assets/46a2f29f-9936-409a-93eb-3445ae5f99c2" />
-<img width="972" height="702" alt="image" src="https://github.com/user-attachments/assets/f6fe4c71-08dc-4ec5-b812-4c0c21825601" />
-<img width="917" height="386" alt="image" src="https://github.com/user-attachments/assets/9001272d-0f46-44fb-9ebb-9febbbf19b40" />
-<img width="796" height="837" alt="image" src="https://github.com/user-attachments/assets/907399eb-bd75-4e36-a8a6-6cfab8ba57dd" />
 <img width="1155" height="738" alt="image" src="https://github.com/user-attachments/assets/52c27738-8813-485a-a1bd-1c2158da7863" />
+<img width="995" height="157" alt="image" src="https://github.com/user-attachments/assets/ff8be2dc-cf53-4fb4-a272-a782bf7c7206" />
 
 ---
 
