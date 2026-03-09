@@ -1,199 +1,452 @@
-# 🧠 Stroke Prediction – Data Mining Project (OU 20595)
+# 🧠 Stroke Prediction – Data Mining Project
 
-This repository contains my **Data Mining assignments (Maman 21 + Maman 22)** for the Open University course *Data Mining (20595)*.  
-The task focuses on **predicting stroke risk** using clinical and demographic data, applying **classification and prediction methods**.
-The project extends the previous work on the **Healthcare Stroke Prediction Dataset** and includes both **predictive modeling** and **unsupervised analysis**.
+## 📊 Project Overview
 
----
+This project explores clinical and demographic data in order to identify **patterns associated with stroke risk**.
 
-## 🎯 Project Goal
+The work combines multiple **Data Mining techniques** including:
 
-The objective was to **predict whether a patient is at risk of stroke** based on features such as age, hypertension, heart disease, glucose level, BMI, smoking habits, and more.
+* Exploratory Data Analysis (EDA)
+* Feature Engineering
+* Supervised Learning
+* Association Rule Mining
+* Clustering Analysis
+* Neural Networks (Deep Learning)
 
-Specific goals:
-
-* Identify variables most strongly associated with stroke risk.
-* Train and compare at least **two classification models**.
-* Evaluate models using **accuracy, precision, recall, F1, ROC AUC**.
-* Derive practical conclusions for medical risk prediction.
+The goal is to analyze the dataset from multiple perspectives and uncover meaningful insights about stroke risk factors.
 
 ---
 
-## 📂 Dataset
+# 🎯 Project Goal
 
-* Source: [Kaggle – Stroke Prediction Dataset](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset)
-* 5,110 patient records
-* Target variable: `stroke` (binary: 1 = stroke, 0 = no stroke)
-* Contains both clinical (hypertension, heart disease, glucose, BMI) and demographic (age, gender, marital status, work type, residence, smoking) features.
+The objective of this project is to **predict whether a patient is at risk of stroke** based on medical and demographic attributes.
+
+The analysis focuses on:
+
+* Identifying variables strongly associated with stroke
+* Building predictive classification models
+* Discovering hidden patterns using association rules
+* Identifying patient groups using clustering
+* Exploring deep learning approaches for prediction
 
 ---
 
-## ⚙️ Methodology
+# 📂 Dataset
 
-The work was implemented in **Python (PyCharm)** using `pandas`, `scikit-learn`, `imblearn`, and `matplotlib`.
+Dataset source:
 
-### 🔹 Data Preparation
+Stroke Prediction Dataset (Kaggle)
+
+The dataset contains **5,110 patient records** with attributes such as:
+
+* Age
+* Gender
+* Hypertension
+* Heart disease
+* Average glucose level
+* BMI
+* Smoking status
+* Work type
+* Residence type
+
+The target variable:
+
+**stroke**
+
+```
+1 → stroke occurred  
+0 → no stroke
+```
+
+⚠ The dataset is highly **imbalanced**, with stroke cases representing a small minority of observations.
+
+# 📊 Dataset Exploration
+
+### Stroke Class Distribution
+
+<img width="741" height="572" alt="image" src="https://github.com/user-attachments/assets/d56d231f-7b13-4846-97c9-13f87f64540e" />
+
+The dataset is highly imbalanced, with stroke cases representing a small fraction of observations.
+
+---
+
+### Age Distribution
+
+<img width="677" height="482" alt="image" src="https://github.com/user-attachments/assets/ac213c80-199d-4a99-b814-256752f076e9" />
+
+Age is one of the most important predictors for stroke risk.
+
+---
+
+### Glucose Level Distribution
+
+<img width="751" height="502" alt="image" src="https://github.com/user-attachments/assets/c94a99c1-5a66-40ca-a004-2b6c9fa502fd" />
+
+Higher glucose levels appear more frequently among stroke cases.
+
+---
+
+### BMI Distribution
+
+<img width="733" height="455" alt="image" src="https://github.com/user-attachments/assets/ef48dcfb-cdb7-4470-b5f1-a63b66dc2f5d" />
+
+---
+
+# 🧹 Data Preprocessing
+
+Before training models, the dataset required several preprocessing steps.
+
+### Cleaning and Handling Missing Values
+
+The following actions were performed:
 
 * Removed irrelevant column (`id`)
-* Handled missing values in `bmi`, `smoking_status`, `gender`
-* Clipped outliers in glucose and BMI
-* Encoded categorical variables (One-Hot & Frequency encoding)
-* Normalized numeric features with `MinMaxScaler`
-* Engineered additional features:
+* Handled missing values in **BMI**
+* Cleaned inconsistent entries in **smoking_status**
+* Removed rare gender category (`Other`)
 
-  * `glucose_bmi_ratio`, `bmi_age_product`, `glucose_age_ratio`
-  * `age_hypertension`, `is_senior`, `heart_senior_interaction`
-  * `smoke_age_interaction`, `age_squared`, etc.
+### Feature Scaling
 
-### 🔹 Handling Class Imbalance
+Numeric features were normalized using:
 
-* Only \~5% positive stroke cases
-* Applied **SMOTETomek** to balance the dataset
-
-### 🔹 Models Used
-
-1. **Decision Tree (C4.5/Entropy)**
-
-   * `max_depth=4`, `min_samples_leaf=40`, `class_weight="balanced"`
-2. **Random Forest**
-
-   * `n_estimators=150`, `min_samples_leaf=2`, class weighting `{0:1, 1:3}`
-
----
-
-## 📊 Results
-
-* Both models achieved **accuracy above 90%**, with Random Forest showing higher recall and robustness.
-* Decision Tree: provided interpretability and clear decision rules.
-* Random Forest: superior predictive power, better ROC AUC, but less explainable.
-
-Confusion matrices and detailed metrics (Precision, Recall, F1, Specificity, False Negatives) were computed.
-
----
-
-## ▶️ Running the Project
-
-Clone the repo and run the script:
-
-```bash
-python Q2.py
+```
+MinMaxScaler
 ```
 
-Requirements:
+### Feature Engineering
 
-```txt
-pandas
-numpy
-scikit-learn
-imblearn
-matplotlib
+Additional features were created to capture interactions between variables.
+
+Examples include:
+
+* `glucose_bmi_ratio`
+* `bmi_age_product`
+* `glucose_age_ratio`
+* `age_hypertension`
+* `is_senior`
+* `heart_senior_interaction`
+* `age_squared`
+
+These features help machine learning models detect more complex patterns.
+
+<img width="838" height="833" alt="image" src="https://github.com/user-attachments/assets/60d28d56-d124-4d15-bbd8-9db00140bb35" />
+<img width="847" height="426" alt="image" src="https://github.com/user-attachments/assets/d8985027-c60b-4d24-bee9-85895d5be48f" />
+<img width="837" height="352" alt="image" src="https://github.com/user-attachments/assets/c5dbc367-5bc8-4cae-8138-7d5739140633" />
+
+---
+
+# 📊 Exploratory Data Analysis
+
+Exploratory analysis was performed to understand variable distributions and correlations.
+
+Visualizations included:
+
+* Age distribution
+* BMI distribution
+* Glucose distribution
+* Correlation heatmap
+
+These graphs helped identify possible relationships between variables and stroke risk.
+
+<img width="446" height="863" alt="image" src="https://github.com/user-attachments/assets/e9cfcfdd-af46-4c52-813a-8d3a69f97bdc" />
+
+<img width="592" height="436" alt="image" src="https://github.com/user-attachments/assets/dc9332ec-15ca-480e-9c3f-fd2e7432816c" />
+
+---
+
+# 🌳 Supervised Learning Models
+
+Two machine learning models were implemented to predict stroke risk.
+
+## Decision Tree
+
+Decision trees provide interpretable rules that explain how predictions are made.
+
+Advantages:
+
+* Transparent model
+* Easy to interpret
+* Captures non-linear relationships
+
+
+<img width="862" height="380" alt="image" src="https://github.com/user-attachments/assets/15a30610-58ff-4308-b94c-b121eafcdf09" />
+
+
+## Random Forest
+
+Random Forest improves predictive accuracy by combining multiple decision trees.
+
+Advantages:
+
+* Reduced overfitting
+* Higher predictive performance
+* Robust to noise in data
+
+Model evaluation metrics included:
+
+* Accuracy
+* Precision
+* Recall
+* F1 Score
+* ROC AUC
+
+<img width="851" height="388" alt="image" src="https://github.com/user-attachments/assets/25541a6a-58d0-4178-a74a-7e473bbc589f" />
+
+<img width="788" height="115" alt="image" src="https://github.com/user-attachments/assets/9e1aef62-c5c7-49fd-b7c2-7a221978d192" />
+
+---
+
+# 🔗 Association Rule Mining (Apriori)
+
+To discover hidden relationships between features, the **Apriori algorithm** was applied.
+
+Parameters used:
+
+```
+min_support = 0.4
+min_confidence = 0.6
+```
+
+The dataset was discretized and transformed into categorical groups before applying the algorithm.
+
+Examples of preprocessing steps:
+
+* Age grouped into categories
+* BMI grouped into weight categories
+* Binary features created (e.g. `is_old`, `married_old`)
+
+The analysis produced **54 association rules** with **Lift > 1**, focusing on the population where stroke occurred.
+
+These rules reveal combinations of medical and demographic factors associated with stroke risk.
+
+<img width="852" height="740" alt="image" src="https://github.com/user-attachments/assets/46a2f29f-9936-409a-93eb-3445ae5f99c2" />
+<img width="972" height="702" alt="image" src="https://github.com/user-attachments/assets/f6fe4c71-08dc-4ec5-b812-4c0c21825601" />
+<img width="917" height="386" alt="image" src="https://github.com/user-attachments/assets/9001272d-0f46-44fb-9ebb-9febbbf19b40" />
+<img width="796" height="837" alt="image" src="https://github.com/user-attachments/assets/907399eb-bd75-4e36-a8a6-6cfab8ba57dd" />
+<img width="1155" height="738" alt="image" src="https://github.com/user-attachments/assets/52c27738-8813-485a-a1bd-1c2158da7863" />
+
+---
+
+# 🧩 Clustering Analysis
+
+Unsupervised learning techniques were used to identify **groups of patients with similar characteristics**.
+
+Algorithm used:
+
+```
+K-Means
+```
+
+### Determining the Number of Clusters
+
+Several evaluation methods were used:
+
+* SSE (Sum of Squared Errors)
+* Silhouette Score
+* Elbow Method
+
+The optimal number of clusters was found around:
+
+```
+k = 10
+```
+<img width="1032" height="600" alt="image" src="https://github.com/user-attachments/assets/0e6d9638-e705-4656-9f60-96c6012ed259" />
+
+
+Clusters were analyzed based on:
+
+* cluster size
+* centroid values
+* stroke rate inside each cluster
+
+Some clusters showed significantly higher stroke prevalence.
+
+<img width="807" height="536" alt="image" src="https://github.com/user-attachments/assets/cc7d8eb4-4683-4287-9cff-96465a359ec6" />
+<img width="1135" height="556" alt="image" src="https://github.com/user-attachments/assets/4b8eae5f-00cb-4294-a5b6-e487780b9aca" />
+
+<img width="802" height="508" alt="image" src="https://github.com/user-attachments/assets/f5aad728-c5b0-407c-955d-b4e48c7d2013" />
+<img width="1141" height="562" alt="image" src="https://github.com/user-attachments/assets/ee3db9ac-2119-482d-af60-589edefa4e48" />
+
+<img width="967" height="536" alt="image" src="https://github.com/user-attachments/assets/939ab1f1-d4f6-46e7-b6f1-eb1c98170046" />
+
+---
+
+# 🧠 Neural Network Model
+
+A neural network model was implemented to explore deep learning approaches for stroke prediction.
+
+Implementation:
+
+```
+PyTorch
+```
+
+### Model Architecture
+
+The neural network includes:
+
+* Input layer with engineered features
+* Hidden layers with **LeakyReLU activation**
+* Batch Normalization
+* Dropout regularization
+* Output layer with **Sigmoid activation**
+
+### Handling Imbalanced Data
+
+Because stroke cases are rare, the model uses:
+
+```
+Focal Loss
+```
+
+instead of standard binary cross-entropy.
+
+Focal Loss focuses learning on difficult samples and improves performance on minority classes.
+
+### Hyperparameter Optimization
+
+Several configurations were tested including:
+
+* hidden layer sizes
+* learning rate
+* batch size
+* loss parameters
+
+The final configuration was selected based on validation performance.
+
+<img width="967" height="550" alt="image" src="https://github.com/user-attachments/assets/a1976698-fddd-494c-899b-aae46bdbeb7c" />
+<img width="925" height="687" alt="image" src="https://github.com/user-attachments/assets/846a2ccb-fa9b-470e-9df0-60013558bc7e" />
+
+---
+
+# 📊 Model Evaluation
+
+The neural network was evaluated using multiple metrics:
+
+* Accuracy
+* Precision
+* Recall
+* F1 Score
+* ROC AUC
+* Specificity
+
+Training progress was monitored using **loss curves**.
+
+<img width="727" height="723" alt="image" src="https://github.com/user-attachments/assets/cfa9e123-f333-4141-aa6b-f9c5e8175b70" />
+<img width="767" height="615" alt="image" src="https://github.com/user-attachments/assets/9ffe0d78-a3e7-4e8c-8096-9b32a7b8b6c3" />
+
+---
+
+# 🔄 Project Pipeline
+
+```
+Dataset
+   │
+   ▼
+Data Cleaning
+   │
+   ▼
+Feature Engineering
+   │
+   ▼
+Exploratory Data Analysis
+   │
+   ▼
+Machine Learning Models
+   ├─ Decision Tree
+   └─ Random Forest
+   │
+   ▼
+Association Rules
+   └─ Apriori Algorithm
+   │
+   ▼
+Clustering
+   └─ KMeans
+   │
+   ▼
+Neural Network (PyTorch)
+   │
+   ▼
+Model Evaluation
+   │
+   ▼
+Insights
 ```
 
 ---
 
-## 📖 Notes
+# 📂 Project Structure
 
-* This project is the **first stage (Maman 21)** of the final assignment.
-* In the next stage (**Maman 22**), additional methods are applied: **clustering and neural networks**.
-* The code was developed and tested in **PyCharm**, with simple run configuration.
+```
+Stroke-Prediction-Data-Mining-Project
 
----
+dataset
+│ healthcare-dataset-stroke-data.csv
 
-## 📜 License
+classification
+│ Q2.py
 
-All rights reserved. This project was submitted as part of the academic requirements for course 20595 (*Data Mining*), Open University of Israel.
+association_rules
+│ 22q1t.py
 
----
+clustering
+│ blistroke1.py
+│ wstroke1.py
 
-# Stroke Prediction – Data Mining Project (OU 20595)
+neural_network
+│ noiro6.py
 
-This repository contains my **Data Mining assignments (Maman 21 + Maman 22)** for the Open University course *Data Mining (20595)*.  
-The project extends the previous work on the **Healthcare Stroke Prediction Dataset** and includes both **predictive modeling** and **unsupervised analysis**.
+README.md
+```
 
----
+### Code Files Description
 
-## 📖 Maman 22 – Extended Analysis
+**Q2.py**
 
-After building the predictive models in Maman 21, Maman 22 focused on **knowledge discovery** using two main approaches:
+Classification models including Decision Tree and Random Forest.
 
-### 1. Association Rule Mining (Apriori)
-- Applied **Apriori algorithm** with thresholds:  
-  - `min_support = 0.4`  
-  - `min_confidence = 0.6`  
-- Dataset preprocessing included:  
-  - Discretization of `age`, `bmi`, `glucose` into clinical groups.  
-  - Feature merging (e.g., *Obese + Overweight → High*).  
-  - Binary feature engineering (e.g., `is_old`, `married_old`, `urban_and_private`).  
-- Extracted **54 strong rules** with **Lift > 1**, focusing only on **stroke=1** population.  
-- Rules highlight combinations of clinical and demographic risk factors correlated with stroke.
+**22q1t.py**
 
-### 2. Clustering Analysis
-- Used **KMeans** on normalized features after outlier filtering (Isolation Forest).  
-- Evaluated clustering with:  
-  - **SSE (Sum of Squared Errors)**  
-  - **Silhouette Score**  
-- Optimal solution found around **k=10 clusters**, balancing compactness and separation.  
-- Outputs include:  
-  - Stroke rate per cluster.  
-  - Final centroids table.  
-  - Clustered instances distribution.  
-  - Visualizations (feature–stroke correlations, scatter plots, stacked bars).
+Association rule mining using the Apriori algorithm.
 
-### 3. Neural Networks (Deep Learning)
+**blistroke1.py / wstroke1.py**
 
-In addition to rule mining and clustering, we implemented a **feed-forward neural network** (file: `noiro6.py`) to improve stroke prediction.
+Clustering analysis using K-Means and cluster evaluation metrics.
 
-#### ⚙️ Implementation
-- Framework: **TensorFlow / Keras**
-- Architecture:
-  - Input layer: numeric + one-hot encoded categorical features
-  - Hidden layers: Dense layers with **ReLU** activation
-  - Output layer: single neuron with **Sigmoid** activation (binary classification)
-- Training:
-  - Optimizer: **Adam**
-  - Loss: **Binary Crossentropy**
-  - Class imbalance handled using **class weights**
-- Evaluation metrics:
-  - **Accuracy**
-  - **Precision**
-  - **Recall (Sensitivity)**
-  - **Specificity**
-  - **ROC AUC**
+**noiro6.py**
 
-#### 📊 Results
-- The model achieved accuracy > 90% with improved recall compared to baseline tree models.
-- ROC AUC demonstrated good separability between stroke vs. non-stroke cases.
-- Graphs of **loss curves**, **ROC curves**, and **confusion matrices** are included in the full report (`maman22.pdf`).
-
-#### 🚀 Technologies Used
-- **Python 3.10**
-- **TensorFlow / Keras**
-- **scikit-learn** (data preprocessing, metrics)
-- **imbalanced-learn** (SMOTETomek in earlier stages)
-- **matplotlib** / **seaborn** (visualizations)
+Neural network implementation using PyTorch including focal loss and hyperparameter tuning.
 
 ---
 
-## 📂 Code Files (Maman 22)
+# 📊 Key Insights
 
-- `22q1t.py` – Association Rules with Apriori.  
-- `noiro6.py` – Neural network baseline for stroke classification.  
-- `blistroke1.py`, `wstroke1.py` – Additional experiments and preprocessing flows.  
+The analysis revealed several patterns:
 
----
-
-## 📊 Example Results
-
-- **Apriori**: Found rules such as  
-  *{is_old=1, high_glucose=1} ⇒ {stroke=1}* with strong support and confidence.  
-- **Clustering**: Certain clusters showed stroke prevalence > 25%, while others had near 0%.  
-- These findings validate the usefulness of combining **rule-based insights** with **unsupervised learning**.
+* Age is strongly associated with stroke risk
+* High glucose levels frequently appear in stroke cases
+* BMI interacts with other medical conditions
+* Certain clusters contain significantly higher stroke rates
+* Deep learning models can improve recall for minority classes
 
 ---
 
-## 📝 Notes
+# 🛠 Technologies Used
 
-- All PDF deliverables (`maman21.pdf`, `maman22.pdf`) are included in the **private repository** with full tables, graphs, and answers.  
-- This public version provides code, structure, and documentation only.
+Python
+Pandas
+NumPy
+Scikit-learn
+Matplotlib
+Apriori Algorithm
+K-Means Clustering
+PyTorch
 
+---
 
+# ⚠ Academic Integrity Notice
+
+This repository is shared for educational and portfolio purposes only.
+
+Students currently taking similar courses should not copy or submit this work as their own.
