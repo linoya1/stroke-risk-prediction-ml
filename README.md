@@ -417,6 +417,74 @@ Neural network implementation using PyTorch including focal loss and hyperparame
 
 ---
 
+## ⚙️ Environment Setup
+
+This project was developed in **Python 3** using **PyCharm** as the development environment.
+
+Required libraries:
+
+- pandas
+- numpy
+- matplotlib
+- scikit-learn
+- imbalanced-learn
+- mlxtend
+- torch
+- seaborn
+
+---
+
+## 📦 Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/linoya1/Stroke-Prediction-Data-Mining-Project.git
+cd Stroke-Prediction-Data-Mining-Project
+```
+
+Install the required packages:
+
+```bash
+pip install pandas numpy matplotlib scikit-learn imbalanced-learn mlxtend torch seaborn
+```
+
+---
+
+## ▶️ Running the Project
+
+Run each module separately according to the analysis you want to reproduce.
+
+### Classification
+
+```bash
+python classification/Q2.py
+```
+
+### Association Rules
+
+```bash
+python association_rules/22q1t.py
+```
+
+### Clustering
+
+```bash
+python clustering/blistroke1.py
+```
+
+or
+
+```bash
+python clustering/wstroke1.py
+```
+
+### Neural Network
+
+```bash
+python neural_network/noiro6.py
+```
+
 # 📊 Key Insights
 
 The analysis revealed several patterns:
@@ -429,16 +497,19 @@ The analysis revealed several patterns:
 
 ---
 
-# 🛠 Technologies Used
+## 🛠 Technologies Used
 
-Python
-Pandas
-NumPy
-Scikit-learn
-Matplotlib
-Apriori Algorithm
-K-Means Clustering
-PyTorch
+- Python
+- Pandas
+- NumPy
+- Matplotlib
+- Seaborn
+- Scikit-learn
+- Imbalanced-learn
+- Mlxtend
+- PyTorch
+- K-Means Clustering
+- Apriori Algorithm
 
 ---
 ## Academic Context
